@@ -1,10 +1,10 @@
 # Welcome to ORMStorm
 
-ORMStrom is a small library for easy work with databases.
+ORMStorm is a small library for easy work with databases.
 
 ## The key features are:
 
- - **Simplicity:** The library is very simple and it won't take long to learn it.
+ - **Simplicity:** The library is very simple, and it won't take long to learn it.
  - **Coding speed:** Integrating the library into your projects won't take long.
  - **Dynamic:** Unlike others, this library will allow you to very quickly create new tables and add databases to them.
 
