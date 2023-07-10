@@ -18,8 +18,7 @@ Using standard tables
 
 ```python
 from ormstorm import Table, Types, Column, create_session  
-  
-  
+
 
 class ExampleTable(Table): 
     __tablename__ = "example"  
