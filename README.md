@@ -50,6 +50,45 @@ with LocalSession() as session:
     session.insert(NewTable(text="Easy use of dynamic tables!"))
 ```
 
+## Magic filters
+
+Magic filters is a special system that allows you to quickly write conditions for sql queries in the usual python style!
+Magic filters currently support the following operators: `=`, `!=`, `>=`, `>`, `<=`, `<`, `&`, `|`, `~`
+
+Simple use of magic filters:
+
+```python
+from ormstorm import Table, Types, Column, create_session
+
+
+class ExampleTable(Table):
+    __tablename__ = "example"
+
+    id = Column(Types.INTEGER, primary_key=True, autoincrement=True)
+    text = Column(Types.STRING)
+
+
+LocalSession = create_session("example.sqlite3", [ExampleTable])
+
+with LocalSession() as session:
+    result = session.select(
+        (ExampleTable.text == "Hello") | ((ExampleTable.id > 5) & (ExampleTable.id < 15))
+    )
+```
+
+Instead of the usual `and` and `or`, `&` and `|` are used, respectively. Also, `~` is used instead of the `or` keyword.
+It is also worth noting that some expressions should be wrapped in parentheses to avoid unexpected errors.
+
+To select all data from a table, simply specify its class.
+
+```python
+result = session.select(ExampleTable)
+```
+
+## Documentation
+
+At the moment, all documentation is located in the library itself. Each function and class has good documentation to understand what the function is for.
+
 ## Note
 
 This library is strictly not recommended for use in large projects because of the small functionality!
