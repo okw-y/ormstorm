@@ -1,14 +1,27 @@
 import sqlite3
 
+from .orm.filters import MagicFilter
 from .orm.column import Column, ColumnType
 from .orm.constants import Types
+from .orm.exceptions import SessionExecuteError
 from .orm.table import Table, DynamicTable
 
-from typing import Callable
+from typing import Callable, Union, Type
+
+
+class Typing(object):
+
+    """
+    Namespace with type hints.
+    """
+
+    AnyTable = Union[MagicFilter, DynamicTable, Table, Type[Table]]
+    NamespaceTable = Union[DynamicTable, Type[Table]]
+    AnyColumn = Union[Column, ColumnType]
 
 
 class Session(object):
-    def __init__(self, path: str, tables: list[type[Table] | DynamicTable] = None, **kwargs) -> None:
+    def __init__(self, path: str, tables: list[Typing.NamespaceTable] = None, **kwargs) -> None:
 
         """
         Creates a new session to work with the database.
@@ -24,7 +37,7 @@ class Session(object):
         for table in self._tables:
             self.create(table)
 
-    def create(self, table: type[Table] | DynamicTable) -> None:
+    def create(self, table: Typing.NamespaceTable) -> None:
 
         """
         Creates a new table in the database.
@@ -37,7 +50,7 @@ class Session(object):
                                f"({', '.join([column.serialize() for column in table.columns().values()])})")
         self._database.commit()
 
-    def clear(self, table: type[Table] | DynamicTable) -> None:
+    def clear(self, table: Typing.NamespaceTable) -> None:
 
         """
         Clears the selected table.
@@ -51,7 +64,7 @@ class Session(object):
         )
         self._database.commit()
 
-    def drop(self, table: type[Table] | DynamicTable) -> None:
+    def drop(self, table: Typing.NamespaceTable) -> None:
 
         """
         Completely removes the table from the database.
@@ -83,61 +96,93 @@ class Session(object):
         )
         self._database.commit()
 
-    def delete(self, column: Column | ColumnType, value: object) -> None:
+    def delete(self, data: Typing.AnyTable) -> None:
 
         """
-        Deletes the selected row in the table.
+        Removes all rows that match the specified conditions
 
-        :param column: The column for which you want to delete the row
-        :param value: The value by which to delete the row
+        :param data: Any type of table or magic filter
         :return: Nothing
         """
 
-        self._database.execute(
-            f"DELETE FROM {column.table} WHERE {column.name} = ?", (value, )
-        )
-        self._database.commit()
+        if not isinstance(data, (MagicFilter, DynamicTable, Table, type(Table))):
+            raise SessionExecuteError("The data is not a successor of MagicFilterData or Table!")
 
-    def exists(self, column: Column | ColumnType, value: object) -> bool:
+        if isinstance(data, (DynamicTable, Table, type(Table))):
+            self._database.execute(
+                f"DELETE FROM {data.__tablename__}"
+            )
+
+        self._database.execute(
+            f"DELETE FROM {data.parameters['table']} WHERE {data.query}", data.variables
+        )
+
+    def exists(self, data: Typing.AnyTable) -> bool:
 
         """
-        Checks for the existence of a row in tables.
+        Checks for the existence of rows satisfying given conditions.
 
-        :param column: Column on which to check
-        :param value: Value on which to check
+        :param data: Any type of table or magic filter
         :return: Boolean
         """
 
+        if not isinstance(data, (MagicFilter, DynamicTable, Table, type(Table))):
+            raise SessionExecuteError("The data is not a successor of MagicFilterData or Table!")
+
+        if isinstance(data, (DynamicTable, Table, type(Table))):
+            return not not self._database.execute(
+                f"SELECT EXISTS(SELECT * FROM {data.__tablename__})"
+            ).fetchone()[-1]
+
         return not not self._database.execute(
-            f"SELECT EXISTS(SELECT {column.name} FROM {column.table} WHERE {column.name} = {value})"
-        ).fetchone()[0]
+            f"SELECT EXISTS(SELECT * FROM {data.parameters['table']} WHERE {data.query})", data.variables
+        ).fetchone()[-1]
 
-    def get(self, column: Column | ColumnType, value: object) -> list[tuple]:
+    def select(self, data: Typing.AnyTable, items: list[Typing.AnyColumn] = None) -> list[tuple]:
 
         """
-        Returns all rows that meet the conditions.
+        Selects certain data from a table that satisfies given conditions.
 
-        :param column: Column on which to get
-        :param value: Value on which to get
-        :return: List of rows
+        :param data: Any type of table or magic filter
+        :param items: Elements to select
+        :return: List of tuples
         """
+
+        if not isinstance(data, (MagicFilter, DynamicTable, Table, type(Table))):
+            raise SessionExecuteError("The data is not a successor of MagicFilterData or Table!")
+
+        select = "*" if not items else ", ".join(
+            [f"{item.table}.{item.name}" for item in items]
+        )
+
+        if isinstance(data, (DynamicTable, Table, type(Table))):
+            return self._database.execute(
+                f"SELECT {select} FROM {data.__tablename__}"
+            ).fetchall()
 
         return self._database.execute(
-            f"SELECT * FROM {column.table} WHERE {column.name} = ?", (value, )
+            f"SELECT {select} FROM {data.parameters['table']} WHERE {data.query}", data.variables
         ).fetchall()
 
-    def count(self, column: Column | ColumnType, value: object) -> int:
+    def count(self, data: Typing.AnyTable) -> int:
 
         """
-        Count the number of rows that meet the conditions.
+        Counts the number of rows satisfying given conditions.
 
-        :param column: Column on which to count
-        :param value: Value on which to count
+        :param data: Any type of table or magic filter
         :return: Integer
         """
 
+        if not isinstance(data, (MagicFilter, DynamicTable, Table, type(Table))):
+            raise SessionExecuteError("The data is not a successor of MagicFilterData or Table!")
+
+        if isinstance(data, (DynamicTable, Table, type(Table))):
+            return self._database.execute(
+                f"SELECT COUNT(*) FROM {data.__tablename__}"
+            ).fetchone()[-1]
+
         return self._database.execute(
-            f"SELECT COUNT({column.name}) FROM {column.table} WHERE {column.name} = ?", (value, )
+            f"SELECT COUNT(*) FROM {data.parameters['table']} WHERE {data.query}", data.variables
         ).fetchone()[-1]
 
     def execute(self, sql: str, parameters: tuple | object = ...) -> sqlite3.Cursor:
@@ -169,7 +214,7 @@ class Session(object):
         self.close()
 
 
-def create_session(path: str, tables: list[type[Table]], **kwargs) -> Callable[[], Session]:
+def create_session(path: str, tables: list[Typing.NamespaceTable], **kwargs) -> Callable[[], Session]:
 
     """
     Creates all tables in the selected database.

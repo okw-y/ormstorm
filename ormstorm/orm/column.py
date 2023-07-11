@@ -1,4 +1,7 @@
-class Column(object):
+from .filters import MagicFilter
+
+
+class Column(MagicFilter):
     def __init__(self, type: str, not_null: bool = False, default: object = None, autoincrement: bool = False,
                  unique: bool = False, primary_key: bool = False, check: str = None) -> None:
 
@@ -13,6 +16,8 @@ class Column(object):
         :param primary_key: Uniquely identifies each entry in a table
         :param check: Used to limit the range of values that can be placed in a column
         """
+
+        super().__init__("")
 
         self.type = type
         self.options = self._serialize_options(
@@ -40,7 +45,7 @@ class Column(object):
         return " ".join(options)
 
 
-class ColumnType(object):
+class ColumnType(MagicFilter):
     def __init__(self, table: str, name: str, type: str, options: str = "") -> None:
 
         """
@@ -51,6 +56,8 @@ class ColumnType(object):
         :param type: Column type
         :param options: Column options
         """
+
+        super().__init__(f"{table}.{name}", parameters={"table": table})
 
         self.table = table
         self.name = name
