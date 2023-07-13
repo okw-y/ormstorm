@@ -5,6 +5,7 @@ from .orm.column import Column, ColumnType
 from .orm.constants import Types
 from .orm.exceptions import SessionExecuteError
 from .orm.table import Table, DynamicTable
+from .utils.dict_factory import dict_factory
 
 from typing import Callable, Union, Type
 
@@ -138,7 +139,7 @@ class Session(object):
             f"SELECT EXISTS(SELECT * FROM {data.parameters['table']} WHERE {data.query})", data.variables
         ).fetchone()[-1]
 
-    def select(self, data: Typing.AnyTable, items: list[Typing.AnyColumn] = None) -> list[tuple]:
+    def select(self, data: Typing.AnyTable, items: list[Typing.AnyColumn] = None) -> list[dict[str, object]]:
 
         """
         Selects certain data from a table that satisfies given conditions.
@@ -156,13 +157,13 @@ class Session(object):
         )
 
         if isinstance(data, (DynamicTable, Table, type(Table))):
-            return self._database.execute(
+            return dict_factory(self._database.execute(
                 f"SELECT {select} FROM {data.__tablename__}"
-            ).fetchall()
+            ))
 
-        return self._database.execute(
+        return dict_factory(self._database.execute(
             f"SELECT {select} FROM {data.parameters['table']} WHERE {data.query}", data.variables
-        ).fetchall()
+        ))
 
     def count(self, data: Typing.AnyTable) -> int:
 
