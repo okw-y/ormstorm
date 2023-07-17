@@ -20,4 +20,5 @@ class Types(object):
     STRING = "STRING"
     TEXT = "TEXT"
     TIME = "TIME"
+    TIMESTAMP = "TIMESTAMP"
     VARCHAR = "VARCHAR"

@@ -97,6 +97,33 @@ class Session(object):
         )
         self._database.commit()
 
+    def update(self, data: Typing.AnyTable, table: Table) -> None:
+
+        """
+        Updates the selected rows in the table.
+
+        :param data: Initialized table object
+        :param table: Any type of table or magic filter
+        :return: Nothing
+        """
+
+        if not isinstance(data, (MagicFilter, DynamicTable, Table, type(Table))):
+            raise SessionExecuteError("The data is not a successor of MagicFilterData or Table!")
+
+        update = ", ".join([f"{item} = ?" for item in table.values.keys()])
+
+        if isinstance(data, (DynamicTable, Table, type(Table))):
+            self._database.execute(
+                f"UPDATE {data.__tablename__} SET {update}", (*table.values.values(), )
+            )
+            return self._database.commit()
+
+        self._database.execute(
+            f"UPDATE {data.parameters['table']} SET {update} WHERE {data.query}",
+            (*table.values.values(), *data.variables)
+        )
+        return self._database.commit()
+
     def delete(self, data: Typing.AnyTable) -> None:
 
         """
@@ -113,10 +140,12 @@ class Session(object):
             self._database.execute(
                 f"DELETE FROM {data.__tablename__}"
             )
+            return self._database.commit()
 
         self._database.execute(
             f"DELETE FROM {data.parameters['table']} WHERE {data.query}", data.variables
         )
+        return self._database.commit()
 
     def exists(self, data: Typing.AnyTable) -> bool:
 
