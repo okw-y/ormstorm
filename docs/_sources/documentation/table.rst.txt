@@ -1,0 +1,20 @@
+Table
+=====
+
+.. automodule:: ormstorm.orm.table
+   :members:
+   :undoc-members:
+   :exclude-members: TableMeta
+
+
+Usage
+#####
+
+
+.. code-block:: python
+
+    class YourTable(Table):
+        __tablename__ = "example"  # Specify the table name
+
+        id = Column(Types.INTEGER, primary_key=True)  # Create a column that is a unique number
+        text = Column(Types.STRING)  # Create a regular string column

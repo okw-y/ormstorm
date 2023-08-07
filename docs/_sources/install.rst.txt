@@ -1,0 +1,44 @@
+Installation
+============
+
+
+From PyPi
+#########
+
+
+It is recommended to install the library through PyPi!
+
+
+Typical installation
+--------------------
+
+.. code-block:: bash
+
+    pip install ormstorm
+
+
+Installing the selected version
+-------------------------------
+
+
+.. code-block:: bash
+
+    pip install ormstorm==0.0.3
+
+
+Upgrading an installed library
+------------------------------
+
+
+.. code-block:: bash
+
+    pip install ormstorm --upgrade
+
+
+From GitHub
+###########
+
+
+.. code-block:: bash
+
+    pip install git+https://github.com/menlis-smith/ormstorm.git

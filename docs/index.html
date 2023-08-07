@@ -1,0 +1,390 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Installation" href="install.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+        <title>Ormstorm 0.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="#"><div class="brand">Ormstorm 0.0.3 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/ormstorm.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">Ormstorm 0.0.3 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/session.html">Session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/column.html">Column</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/table.html">Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/magic-filters.html">Magic Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/constants.html">Constants</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="welcome-to-ormstorm-s-documentation">
+<h1>Welcome to Ormstorm’s documentation!<a class="headerlink" href="#welcome-to-ormstorm-s-documentation" title="Permalink to this heading">#</a></h1>
+<p>ORMStorm is a small library for easy work with databases.</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Simplicity</strong>: The library is very simple, and it won’t take long to learn it.</p></li>
+<li><p><strong>Coding speed</strong>: Integrating the library into your projects won’t take long.</p></li>
+<li><p><strong>Dynamic</strong>: Unlike others, this library will allow you to very quickly create new tables and add databases to them.</p></li>
+</ul>
+</section>
+<section id="simple-usage">
+<h2>Simple usage<a class="headerlink" href="#simple-usage" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ormstorm</span> <span class="kn">import</span> <span class="n">Table</span><span class="p">,</span> <span class="n">Types</span><span class="p">,</span> <span class="n">Column</span><span class="p">,</span> <span class="n">create_session</span>
+
+
+<span class="k">class</span> <span class="nc">ExampleTable</span><span class="p">(</span><span class="n">Table</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
+
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">INTEGER</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">autoincrement</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Types</span><span class="o">.</span><span class="n">STRING</span><span class="p">)</span>
+
+
+<span class="n">LocalSession</span> <span class="o">=</span> <span class="n">create_session</span><span class="p">(</span><span class="s2">&quot;example.sqlite3&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">ExampleTable</span><span class="p">])</span>
+
+<span class="k">with</span> <span class="n">LocalSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">ExampleTable</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#from-pypi">From PyPi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="install.html#typical-installation">Typical installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#installing-the-selected-version">Installing the selected version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install.html#upgrading-an-installed-library">Upgrading an installed library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#from-github">From GitHub</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/session.html">Session</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation/session.html#ormstorm.Session"><code class="docutils literal notranslate"><span class="pre">Session</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.clear"><code class="docutils literal notranslate"><span class="pre">Session.clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.close"><code class="docutils literal notranslate"><span class="pre">Session.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.count"><code class="docutils literal notranslate"><span class="pre">Session.count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.create"><code class="docutils literal notranslate"><span class="pre">Session.create()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.delete"><code class="docutils literal notranslate"><span class="pre">Session.delete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.drop"><code class="docutils literal notranslate"><span class="pre">Session.drop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.execute"><code class="docutils literal notranslate"><span class="pre">Session.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.exists"><code class="docutils literal notranslate"><span class="pre">Session.exists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.insert"><code class="docutils literal notranslate"><span class="pre">Session.insert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.select"><code class="docutils literal notranslate"><span class="pre">Session.select()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/session.html#ormstorm.Session.update"><code class="docutils literal notranslate"><span class="pre">Session.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/session.html#ormstorm.create_session"><code class="docutils literal notranslate"><span class="pre">create_session()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/session.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/column.html">Column</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation/column.html#ormstorm.orm.column.Column"><code class="docutils literal notranslate"><span class="pre">Column</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/column.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/table.html">Table</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation/table.html#ormstorm.orm.table.DynamicTable"><code class="docutils literal notranslate"><span class="pre">DynamicTable</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documentation/table.html#ormstorm.orm.table.DynamicTable.add"><code class="docutils literal notranslate"><span class="pre">DynamicTable.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/table.html#ormstorm.orm.table.DynamicTable.columns"><code class="docutils literal notranslate"><span class="pre">DynamicTable.columns()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/table.html#ormstorm.orm.table.Table"><code class="docutils literal notranslate"><span class="pre">Table</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documentation/table.html#ormstorm.orm.table.Table.columns"><code class="docutils literal notranslate"><span class="pre">Table.columns()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/table.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/magic-filters.html">Magic Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation/magic-filters.html#ormstorm.orm.filters.magic.MagicFilter"><code class="docutils literal notranslate"><span class="pre">MagicFilter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/magic-filters.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="documentation/magic-filters.html#all-operators">All Operators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="documentation/constants.html">Constants</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types"><code class="docutils literal notranslate"><span class="pre">Types</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.BIGINT"><code class="docutils literal notranslate"><span class="pre">Types.BIGINT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.BLOB"><code class="docutils literal notranslate"><span class="pre">Types.BLOB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.BOOLEAN"><code class="docutils literal notranslate"><span class="pre">Types.BOOLEAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.CHAR"><code class="docutils literal notranslate"><span class="pre">Types.CHAR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.DATE"><code class="docutils literal notranslate"><span class="pre">Types.DATE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.DATETIME"><code class="docutils literal notranslate"><span class="pre">Types.DATETIME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.DECIMAL"><code class="docutils literal notranslate"><span class="pre">Types.DECIMAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.DOUBLE"><code class="docutils literal notranslate"><span class="pre">Types.DOUBLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.INT"><code class="docutils literal notranslate"><span class="pre">Types.INT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.INTEGER"><code class="docutils literal notranslate"><span class="pre">Types.INTEGER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.NONE"><code class="docutils literal notranslate"><span class="pre">Types.NONE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.NUMERIC"><code class="docutils literal notranslate"><span class="pre">Types.NUMERIC</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.REAL"><code class="docutils literal notranslate"><span class="pre">Types.REAL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.STRING"><code class="docutils literal notranslate"><span class="pre">Types.STRING</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.TEXT"><code class="docutils literal notranslate"><span class="pre">Types.TEXT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.TIME"><code class="docutils literal notranslate"><span class="pre">Types.TIME</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.TIMESTAMP"><code class="docutils literal notranslate"><span class="pre">Types.TIMESTAMP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="documentation/constants.html#ormstorm.orm.constants.Types.VARCHAR"><code class="docutils literal notranslate"><span class="pre">Types.VARCHAR</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="install.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Installation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Menlis Smith
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Welcome to Ormstorm’s documentation!</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#simple-usage">Simple usage</a></li>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=65a4545c"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>

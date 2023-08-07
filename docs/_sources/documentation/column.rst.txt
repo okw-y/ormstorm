@@ -1,0 +1,28 @@
+Column
+======
+
+.. automodule:: ormstorm.orm.column
+   :members:
+   :undoc-members:
+   :exclude-members: ColumnType
+
+
+Usage
+#####
+
+The column takes one single mandatory ``type`` argument. You can take the column type from the `Types <constants.html#ormstorm.orm.constants.Types>`_ namespace.
+
+.. code-block:: python
+
+    column = Column(
+        Types.STRING, ...
+    )
+
+Adding a column is currently possible only when creating a table.
+
+.. code-block:: python
+
+    class YourTable(Table):
+        ...
+
+        column = Column(...)

@@ -1,0 +1,45 @@
+Session
+=======
+
+.. automodule:: ormstorm
+   :members:
+   :undoc-members:
+   :exclude-members: Typing
+
+
+Usage
+#####
+
+
+Standard session creation.
+
+.. code-block:: python
+
+    session = Session(
+        path="path/to/database",
+        tables=[YourTable, ...]
+    )
+
+You can also use the ``with`` construct to automatically close the session.
+
+.. code-block:: python
+
+    with Session(
+        path="path/to/database",
+        tables=[YourTable, ...]
+    ) as session:
+        ...
+
+The best solution would be to create a local session. This will allow you not to every time create a new session yourself, specifying the path to the database, table to initialize, etc.
+
+**IMPORTANT!** The local session does not take any arguments and it is impossible to change any parameters for it!
+
+.. code-block:: python
+
+    LocalSession = create_session(
+        path="path/to/database",
+        tables=[YourTable, ...]
+    )
+
+    with LocalSession() as session:
+        ...

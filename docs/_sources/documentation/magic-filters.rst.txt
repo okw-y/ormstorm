@@ -1,0 +1,59 @@
+Magic Filters
+=============
+
+.. automodule:: ormstorm.orm.filters.magic
+   :members:
+   :undoc-members:
+   :exclude-members:
+
+
+Usage
+#####
+
+Magic filters were created to simplify the execution of SQL queries. The syntax is similar to what you write in conditions.
+
+For example, if you want to select all columns where the ID is greater than 5 and not equal to 10, then you just need to write this:
+
+.. code-block:: python
+
+    ...
+
+    with LocalSession() as session:
+        result = session.select(
+            YourTable.id > 5 & YourTable.id != 10
+        )
+
+As you can see, instead of the usual ``and``, the ``&`` operator is used. Also replaced ``or`` with ``|`` and ``not`` with ``~``.
+
+
+All Operators
+#############
+
+
+For convenience, we have created a table that stores all currently supported operators.
+
+
+.. list-table::
+   :widths: 25 25
+   :header-rows: 1
+
+   * - Operator
+     - Description
+   * - ==
+     - Equals
+   * - !=
+     - Not equal
+   * - >=
+     - Greater or equal
+   * - >
+     - Greater
+   * - <=
+     - Less or equal
+   * - <
+     - Less
+   * - &
+     - And
+   * - \|
+     - Or
+   * - ~
+     - Not (Invert)

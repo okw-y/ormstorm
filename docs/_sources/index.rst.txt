@@ -1,0 +1,60 @@
+.. Ormstorm documentation master file, created by
+   sphinx-quickstart on Sun Aug  6 22:14:36 2023.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Ormstorm's documentation!
+====================================
+
+ORMStorm is a small library for easy work with databases.
+
+
+Features
+########
+
+* **Simplicity**: The library is very simple, and it won't take long to learn it.
+* **Coding speed**: Integrating the library into your projects won't take long.
+* **Dynamic**: Unlike others, this library will allow you to very quickly create new tables and add databases to them.
+
+
+Simple usage
+############
+
+.. code-block:: python
+
+   from ormstorm import Table, Types, Column, create_session
+
+
+   class ExampleTable(Table):
+       __tablename__ = "example"
+
+       id = Column(Types.INTEGER, primary_key=True, autoincrement=True)
+       text = Column(Types.STRING)
+
+
+   LocalSession = create_session("example.sqlite3", [ExampleTable])
+
+   with LocalSession() as session:
+       session.insert(ExampleTable(text="Hello, world!"))
+
+
+Contents
+########
+
+
+.. toctree::
+   :maxdepth: 3
+
+   install
+   documentation/session
+   documentation/column
+   documentation/table
+   documentation/magic-filters
+   documentation/constants
+
+
+Indices and tables
+##################
+
+* :ref:`genindex`
+* :ref:`modindex`
