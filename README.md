@@ -87,7 +87,7 @@ result = session.select(ExampleTable)
 
 ## Documentation
 
-At the moment, all documentation is located in the library itself. Each function and class has good documentation to understand what the function is for.
+All documentation is available here: https://menlis-smith.github.io/ormstorm/docs/index.html
 
 ## Note
 
