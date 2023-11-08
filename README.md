@@ -87,7 +87,7 @@ result = session.select(ExampleTable)
 
 ## Documentation
 
-All documentation is available here: https://menlis-smith.github.io/ormstorm/docs/index.html
+All documentation is available here: https://okw-y.github.io/ormstorm/docs/index.html
 
 ## Note
 
